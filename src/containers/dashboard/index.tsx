@@ -36,7 +36,7 @@ import { signupValidation } from 'utils/validate';
 export const Dashboard = (props: any) => {
     const Router = useRouter();
 
-    const { data } = useSelector((state: any) => state.signup);
+    const { data } = useSelector((state: any) => state.update);
     const { jwt } = useSelector((state: any) => state.login);
 
     const [firstname, setfirstname] = useState<string>("");
@@ -62,6 +62,7 @@ export const Dashboard = (props: any) => {
         onSubmit: (values) => {
 
         },
+    
     });
     const handlesubmit = () => {
         dispatch(updateRequest({
@@ -79,23 +80,25 @@ export const Dashboard = (props: any) => {
     }
     const handlepass = () => {
         dispatch(updatepasswordRequest({
-            Password: formik.values.retypePassword ,
+            password: formik.values.retypePassword ,
 
 
         }))
     }
-    const handleAdd = () => {
-
-      alert("updated.......!")
-
-    }
+    function refreshPage(){
+		
+			// eslint-disable-next-line no-restricted-globals
+			location.reload();
+			
+	}
+ 
 
     useEffect(() => {
         dispatch(userRequest({
             jwt: jwt,
         }))
 
-        console.log("logged in....", jwt)
+      
 
     }, []);
 
@@ -105,7 +108,7 @@ export const Dashboard = (props: any) => {
 
 
         console.log('user data....', userdata)
-        console.log('login......', jwt)
+       
 
     }, [userdata]);
 
@@ -130,7 +133,7 @@ export const Dashboard = (props: any) => {
                                             <div className="profile-userpic">
                                                 <img src={userdata.data.data.img} alt=""></img>
                                             </div>
-                                    Hai! {userdata.data.data.firstname}{"  "}{userdata.data.data.lastname}
+                                    Hai {userdata.data.data.firstname}{"  "}{userdata.data.data.lastname}!
                                             <div className="profile-usertitle">
 
                                                 <div className="profile-usertitle-job">
@@ -171,11 +174,12 @@ export const Dashboard = (props: any) => {
                                                         <div className="row">
 
                                                             <div className="col-md-12">
-                                                                <Card style={{ width: '25rem' }} >
+                                                                <br></br>
+                                                                <Card className="col-md-12" >
                                                                     <Card.Header as="h5">profile</Card.Header>
 
                                                                     <Card.Body>
-                                                                        <form >
+                                                                       
                                                                             <fieldset className="form-group">
                                                                                 <textarea className="form-control" placeholder="First Name" onChange={(e) => setfirstname(e.target.value)}>{firstname}</textarea>
                                                                             </fieldset>
@@ -189,7 +193,7 @@ export const Dashboard = (props: any) => {
                                                                     <Button onClick={handlesubmit} >
                                                                         Update Profile
                                                               </Button>
-                                                                        </form>
+                                                                       
                                                                     
                                                                     </Card.Body>
                                                                    
@@ -207,7 +211,7 @@ export const Dashboard = (props: any) => {
 
                                                             <div className="col-md-12">
                                                                 <br></br>
-                                                                <Card style={{ width: '25rem' }} >
+                                                                <Card >
                                                                     <Card.Header as="h5">Forget password?</Card.Header>
                                                                     <Card.Body>
                                                                         <label>Old Password</label>
@@ -240,9 +244,12 @@ export const Dashboard = (props: any) => {
                                                                             onChange={formik.handleChange}
                                                                             value={formik.values.retypePassword}
                                                                         />
-                                                                        {formik.errors.retypePassword ? <div>{formik.errors.retypePassword}</div> : null}
+                                                                      {formik.errors.retypePassword ? <div>{formik.errors.retypePassword}</div> : null}
 
-                                                                        <Button className="btn btn-user" variant="primary" block type="submit" onClick={handlepass} onClickCapture={handleAdd} >change password</Button>
+                                                                      {/* {(data)?
+                                                                     (data.data.message) :""} */}
+
+                                                                        <Button  variant="primary" block type="submit" onClick={handlepass}  >change password</Button>
                                                                     </Card.Body>
                                                                 </Card>
                                                             </div>
