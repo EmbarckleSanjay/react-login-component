@@ -14,6 +14,6 @@ export const API = {
     signup: { apiPath: '/signup', action: httpMethods.POST },
     oauth: { apiPath: '/oauthlogin', action: httpMethods.POST },
     updateuser: { apiPath: '/user', action: httpMethods.PUT  },
-    updatepassword: { apiPath: '/user/changepassword', action: httpMethods.PUT},
+    updatepassword: { apiPath: '/changepassword', action: httpMethods.PUT},
     users :{apiPath: '/user', action: httpMethods.GET}
 };

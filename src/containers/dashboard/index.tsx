@@ -265,10 +265,10 @@ export const Dashboard = (props: any) => {
                                     </div>
 
  
-                                    <Button onClick={() => {
+                                    {/* <Button onClick={() => {
                                     dispatch(signoutRequest());
 
-                                }}>Logout</Button>
+                                }}>Logout</Button> */}
 
 
                                    
