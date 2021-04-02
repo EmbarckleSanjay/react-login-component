@@ -1,0 +1,5 @@
+export const UPDATE_REQUEST = 'update/UPDATE_REQUEST';
+export const UPDATE_RESPONSE = 'update/UPDATE_RESPONSE';
+export const UPDATE_REQUEST_FAIL = 'update/UPDATE_REQUEST_FAIL';
+export const UPDATE_PASSWORD_REQUEST = 'update/UPDATE_PASSWORD_REQUEST';
+
