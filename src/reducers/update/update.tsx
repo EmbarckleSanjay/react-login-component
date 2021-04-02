@@ -22,7 +22,7 @@ const updateReducer: Reducer<IUpdate, updateAction> = (state = initialState, act
             console.log("reduce......")
             return { ...state, isFetching: true, isAuthenticated: false, jwt: null, error: null };
          case types.UPDATE_RESPONSE:
-            return { ...state,  isAuthenticated: true,data: action.payload, error:"haii" }
+            return { ...state,  isAuthenticated: true,data: action.payload, error:null}
         case types.UPDATE_REQUEST_FAIL:
             console.log()
             return { ...state, isFetching: false, isAuthenticated: false, error: "nope" };

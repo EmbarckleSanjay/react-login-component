@@ -14,77 +14,106 @@ export const password = (props: any) => {
   const formik = useFormik({
     initialValues: {
       password: '',
-      retypePassword:''
+      retypePassword: ''
 
     },
-    validate: resetPasswordValidation ,
+    validate: resetPasswordValidation,
 
     onSubmit: (values) => {
-     
+
     },
   });
-console.log("value...",formik.values)
-const handleLogout = () => {
-  dispatch(updateRequest({
+  console.log("value...", formik.values)
+  const handleLogout = () => {
+    dispatch(updateRequest({
 
-    password:formik.values.password,
-
-    
+      password: formik.values.password,
 
 
 
-}))
-}
+
+
+    }))
+  }
   return (
     <>
-{<div>haii....</div>?
-    <div className="col d-flex justify-content-center">
 
-      <div className="col-xl-7 col-lg-8 col-md-12">
+      <div className="col d-flex justify-content-center">
 
-        <div className="p-5 d-flex align-item-center">
-          <form onSubmit={formik.handleSubmit} >
-            <Card style={{ width: '50rem' }} >
-              <Card.Header as="h5">Forget password?</Card.Header>
-              <Card.Body>
-                <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control form-control-user"
-                  id="password"
-                  placeholder="Password"
-                  onChange={formik.handleChange}
-         value={formik.values.password}
-                              />
-               {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-                  
-                 {/* {touched.password && errors.password ?
+        <div className="col-xl-7 col-lg-8 col-md-12">
+
+          <div className="p-5 d-flex align-item-center">
+            <form onSubmit={formik.handleSubmit} >
+              {/* <Card style={{ width: '50rem' }} >
+                <Card.Header as="h5">Forget password?</Card.Header>
+                <Card.Body>
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    className="form-control form-control-user"
+                    id="password"
+                    placeholder="Password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                  />
+                  {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+
+                  {/* {touched.password && errors.password ?
                   <span>{errors.password}</span> :
                   null
                 } */}
-               <label>Re-type Password</label>
-                <input
-                  type="password"
-                  className="form-control form-control-user"
-                  id="retypePassword"
-                  placeholder="Password"
-                  onChange={formik.handleChange}
-                  value={formik.values.retypePassword}
-                                       />
-                        {formik.errors.retypePassword ? <div>{formik.errors.retypePassword}</div> : null}
-                           
+                  {/* <label>Re-type Password</label>
+                  <input
+                    type="password"
+                    className="form-control form-control-user"
+                    id="retypePassword"
+                    placeholder="Password"
+                    onChange={formik.handleChange}
+                    value={formik.values.retypePassword}
+                  />
+                  {formik.errors.retypePassword ? <div>{formik.errors.retypePassword}</div> : null}
 
-                <Card.Text>
 
-                </Card.Text>
-                <Button variant="primary" block type="submit" onClick={handleLogout} >change password</Button>
-              </Card.Body>
-            </Card>
-          </form>
+                  <Card.Text>
+
+                  </Card.Text>
+                  <Button variant="primary" block type="submit" onClick={handleLogout} >change password</Button>
+                </Card.Body>
+              </Card> */} 
+
+
+              <br>
+              </br>
+              <br></br>
+
+
+
+
+              <Card style={{ width: '50rem' }} className="d-flex justify-content-center" >
+                <Card.Header as="h5">Forget password?</Card.Header>
+                <Card.Body>
+                  
+                  <label>Email </label>
+                  <input
+                    type="email"
+                    className="form-control form-control-user"
+                    id="email"
+                  />
+                  <Card.Text>
+
+                  </Card.Text>
+                  <Button variant="primary" block   >change password</Button>
+                </Card.Body>
+              </Card>
+
+
+
+
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    :<div>loading....</div>}
+
     </>
   )
 }
@@ -129,7 +158,7 @@ const handleLogout = () => {
 //   mapPropsToValues: () => ({
 //     password: "",
 //     confirmpass: "",
- 
+
 
 
 

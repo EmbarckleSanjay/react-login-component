@@ -3,7 +3,9 @@ import { updateTypes } from 'actions/actionTypes';
 
 import { apiCall, defaultHeader } from 'utils/api';
 import { API } from 'utils/api-routes'
-import { userResponse, userResponseFail } from 'actions/user/user';
+import {updateResponseFail } from 'actions/update/update';
+import { signoutRequest } from 'actions/auth/login';
+
 // import {  defaultHeader } from 'utils/api';
 // import { API } from 'utils/api-routes';
 
@@ -13,12 +15,12 @@ function* updatepasswordRequest(authDetails: any): any {
     const data = authDetails.payload;
 const response = yield apiCall({ headers, data, ...API.updatepassword });    
 if (response.status===200) {
-    yield put(userResponse(response));
+    yield put(signoutRequest());
    
   
 }
 else {
-    yield put(userResponseFail(response));
+    yield put(updateResponseFail(response));
 
 
 }
