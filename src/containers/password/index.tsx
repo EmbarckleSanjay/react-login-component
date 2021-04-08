@@ -1,10 +1,11 @@
 import { updateRequest } from "actions/update/update";
 import { Formik, useFormik, withFormik } from "formik";
+import { mainModule } from "process";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { resetPasswordValidation } from "utils/validate";
-
+import { Link } from "react-router-dom";
+import { forgotPasswordValidation } from "utils/validate";
 
 
 export const password = (props: any) => {
@@ -13,107 +14,110 @@ export const password = (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const formik = useFormik({
     initialValues: {
-      password: '',
+      email: '',
       retypePassword: ''
 
     },
-    validate: resetPasswordValidation,
+    validate: forgotPasswordValidation,
 
     onSubmit: (values) => {
 
     },
   });
-  console.log("value...", formik.values)
-  const handleLogout = () => {
-    dispatch(updateRequest({
+  console.log("value...", formik.values.email)
+  // const sendmail = require('sendmail')();
+  // sendmail({
+  //   from: formik.values.email,
+  //   to: formik.values.email,
+  //   subject: 'test sendmail',
+  //   html: 'Mail of test sendmail ',
+  // }, function (err: { stack: any; }, reply: any) {
+  //   console.log(err && err.stack);
+  //   console.dir(reply);
+  // })
+  // const handlepass = () => {
+  //   window.location.reload()
+  // }
+  const nodemailer = require("nodemailer");
 
-      password: formik.values.password,
+async function main() {
+ 
+  let testAccount = await nodemailer.createTestAccount();
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, 
+    auth: {
+      user: testAccount.user, 
+      pass: testAccount.pass, 
+    },
+  });
 
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '<sanjay.k@embarckle.com>', // sender address
+    to: formik.values.email, // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
 
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
 
+main().catch(console.error);
 
-    }))
-  }
   return (
     <>
 
-      <div className="col d-flex justify-content-center">
+      <div className=" row d-flex justify-content-center col-md-12 ">
 
-        <div className="col-xl-7 col-lg-8 col-md-12">
+        
 
-          <div className="p-5 d-flex align-item-center">
-            <form onSubmit={formik.handleSubmit} >
-              {/* <Card style={{ width: '50rem' }} >
-                <Card.Header as="h5">Forget password?</Card.Header>
-                <Card.Body>
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    className="form-control form-control-user"
-                    id="password"
-                    placeholder="Password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                  />
-                  {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-
-                  {/* {touched.password && errors.password ?
-                  <span>{errors.password}</span> :
-                  null
-                } */}
-                  {/* <label>Re-type Password</label>
-                  <input
-                    type="password"
-                    className="form-control form-control-user"
-                    id="retypePassword"
-                    placeholder="Password"
-                    onChange={formik.handleChange}
-                    value={formik.values.retypePassword}
-                  />
-                  {formik.errors.retypePassword ? <div>{formik.errors.retypePassword}</div> : null}
-
-
-                  <Card.Text>
-
-                  </Card.Text>
-                  <Button variant="primary" block type="submit" onClick={handleLogout} >change password</Button>
-                </Card.Body>
-              </Card> */} 
-
-
-              <br>
-              </br>
-              <br></br>
+              <form onSubmit={formik.handleSubmit} >
+                <br>
+                </br>
+                <br></br>
 
 
 
 
-              <Card style={{ width: '50rem' }} className="d-flex justify-content-center" >
-                <Card.Header as="h5">Forget password?</Card.Header>
-                <Card.Body>
-                  
-                  <label>Email </label>
-                  <input
-                    type="email"
-                    className="form-control form-control-user"
-                    id="email"
-                  />
-                  <Card.Text>
+                <Card style={{ width: '50rem' }} >
+                  <Card.Header as="h5">Forget password?</Card.Header>
+                  <Card.Body>
 
-                  </Card.Text>
-                  <Button variant="primary" block   >change password</Button>
-                </Card.Body>
-              </Card>
+                    <label>Email </label>
+                    <input
+                      type="email"
+                      className="form-control form-control-user"
+                      id="email"
+                      onChange={formik.handleChange}
+                      value={formik.values.email}
+                    />
+                    {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                    <Card.Text>
 
 
 
 
-            </form>
+                    </Card.Text>
+                    <Button variant="primary" type="submit" onClick={nodemailer} >Send mail</Button>
+                  </Card.Body>
+                </Card>
+
+
+
+
+              </form>
+
           </div>
-        </div>
-      </div>
 
+     
     </>
   )
 }

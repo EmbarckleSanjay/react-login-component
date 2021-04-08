@@ -8,7 +8,7 @@ const apiCall = async (apiConfig: ApiConfig): Promise<any> => {
         const baseUrl = config.apiBaseURL;
 
         const requestConfig: AxiosRequestConfig = {
-            url: `${'http://192.168.29.196:3000'}${apiConfig.apiPath}`,
+            url: `${baseUrl}${apiConfig.apiPath}`,
             method: apiConfig.action,
             data: apiConfig.data,
             headers: apiConfig.headers,

@@ -137,7 +137,6 @@ const signup = (props: any) => {
                                                 onChange={(date: any) => { setdate(date); }}
                                                 selected={date}
                                                 id="date"
-                                                value={Date.now()}
                                                  /> </div>
                                         <Row className=" ">
                                             <div className="form-group col-md-6 mt-1">
